@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html>
+
+
+<head>
+    <style>
+    .hidden
+    {
+        display:none;
+    };
+    .jumbotron
+    {
+    font-family: 'Ek Mukta';
+    };
+    .btn
+    {
+        margin-right: auto;
+        margin-left: auto;
+    };
+    #moxtra_link
+    {
+        margin-right: auto;
+        margin-left: auto;
+    }
+    </style>
+    <script type="text/javascript" >
+            function getURLParameter(name) {
+                return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null
+            }
+            function parseURI() {
+                var uri = window.location.hash.substring(1);
+                var elements = uri.split('&');
+                var data = new Object();
+                for(i = 0; i < elements.length; i++) {
+                    var cur = elements[i].split('=');
+                    data[cur[0]] = cur[1];
+                }
+                return data;
+            }
+            urldata = parseURI();
+            access_token=urldata.access_token;
+            if (access_token) {
+                // Initialize Moxtra SDK Object
+                var options = {
+                    mode: "production", 
+                    client_id: "insert_your_app_client_id", //
+                    access_token: access_token,
+                    invalid_token: function(event) {
+                        //Triggered when the access token is expired or invalid
+                        alert("Access Token expired for session id: " + event.session_id);
+                    }
+                };
+                Moxtra.init(options);
+            }
+            else {
+                //Authenticate and get access token for the user before proceeding further
+                console.log ("No access token found");
+            }
+        </script>
+   <script type="text/javascript" src="https://www.moxtra.com/api/js/moxtra-latest.js" id="moxtrajs"></script>
+   <link href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/shift.css" rel= "stylesheet">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+   <link href = "http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css" rel = "stylesheet">
+   <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ek+Mukta">
+   <link href='http://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
+   <script src="app.js"></script>
+
+   <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+
+   <title>Meet your Nextdoor Neighbors!</title>
+
+</head>
+ 
+<body>
+
+   <ul class = "nav nav-pills" style = "background-color: #BD8107; font-color: #FFFFFF; margin-bottom: 0px; border:none;">
+
+      <li style = "color: #FFFFFF; float:left; font-size: 42px; padding-left: 3em; font-family: NUNITO" >Nextdoor Neighbors</li>
+
+   </ul>
+
+   <div class = "jumbotron" style = "text-align: center; background-color: #6A06A1; margin-top: 0px; border:none">
+      <div id = "first">
+        <h1 style = "color: #FFFFFF">WELCOME TO NEXTDOOR NEIGHBORS!</h1>
+
+     
+
+        <p style = "color: #FFFFFF; padding-top: 2em">Ever wanted to have a chat with someone in a different country?</p>
+
+        <p style = "color: #FFFFFF">Well now you can, all in a single webpage.</p>
+        <p style = "color: #FFFFFF">Think of them as your... nextdoor neighbor!</p>
+      
+      
+      </div>
+      <div id = "second">
+        <h1 style = "color: #FFFFFF;">Select a country you want to chat with <br>and find your Nextdoor Neighbor.</h1>
+        <p style = "color: #FFFFFF; padding-top: 2em">If you have any doubts, just hang up. There are plenty of other interesting folks out there.</p>
+        <p style = "color: #FFFFFF" id = "refresh">Please refresh the page if you want to talk to others.</p>
+
+      </div>
+   </div>
+   <div class = "row" id = "row" style = "; text-align:center">
+      <div class = "col-md-4">
+      </div>
+      <div class = "col-md-4" style = "color: #6A06A1;">
+         <p style = "padding-top: 1em;">Step 1: Enter in your country below to start:</p>
+
+         <select id = "choice" class = "form-control" style = "width: 25%; margin-left:auto; margin-right:auto; color: #6A06A1">
+
+            <option selected = "selected">The United States</option>
+            <option>Mexico</option>
+            <option>Canada</option>
+            <option>Japan</option>
+            <option>China</option>
+         </select>
+         <p style = "padding-top: 1em">Step 2: Get ready to have yourself a nice chat!</p>
+         <p> Step 3 and 4: Read the rules and have fun!</p>
+         <button id = "rules" class = "btn">Click here for rules</button>
+         <div id = "step3-4">
+            <h3>If you agree to:</h3>
+            <li style = "padding-top: 1em">be respectful in both your language and your conduct</li>
+            <li style = "padding-top: 1em">kindly refrain from any slanderous/inappropriate language</li>
+            <li style = "padding-top: 1em; padding-bottom: 1em;">and withhold anything illegal you might want to show...</li>
+            <button class = "btn" style = "margin-left: auto; margin-right:auto">then click here to begin!</button>
+         </div>
+         <div class = "col-md-4">
+         </div>
+      </div>
+    </div>
+    <div class = "row container" id = "country-select">
+        <div class = "col-md-4">
+        </div>
+        <div class = "col-md-4">
+            <h2 style = "text-align:center" id = "intro-line">Countries to chat with: </h2>
+            <span style = "padding-top: 2em; text-align: center"><button class = "btn" id = "US_button" style = "margin-left: auto; margin-right: auto; margin-top: 2em">The United States</button></span><br>
+            <span style = "padding-top: 2em; text-align: center"><button class = "btn" id = "MEX_button" style = "margin-left: auto; margin-right: auto; margin-top: 2em">Mexico</button></span><br>
+            <span style = "padding-top: 2em; text-align: center"><button class = "btn" id = "CAN_button" style = "margin-left: auto; margin-right: auto; margin-top: 2em">Canada</button></span><br>
+            <span style = "padding-top: 2em; text-align: center"><button class = "btn" id = "JP_button" style = "margin-left: auto; margin-right: auto; margin-top: 2em">Japan</button></span><br>
+            <span style = "padding-top: 2em; text-align: center"><button class = "btn" id = "CN_button" style = "margin-left: auto; margin-right: auto; margin-top: 2em">China</button></span><br>
+        </div>
+        <div class = "col-md-4">
+        </div>
+    </div>
+    <div id = "moxtra_link" class = "col-md-4 col-md-offset-4">
+
+    </div>
+
+</body>
+
+</html>
